@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SortImpl {
+
+    // Time O(nlogn) worst O(n^2)
     public void quickSort(int[] nums, int low, int high) {
         if (nums.length == 0) {
             return;
@@ -32,6 +34,7 @@ public class SortImpl {
         quickSort(nums, low, end);
     }
 
+    // Time O(nlogn) Space depends
     public int[] mergeSort(int[] array) {
         int len = array.length;
         if (array.length < 2) {
@@ -69,6 +72,7 @@ public class SortImpl {
         return mergedArray;
     }
 
+    // Time O(n^2) Space O(1)
     public int[] bubbleSort(int[] array) {
         for (int i = array.length; i > 0; i --) {
             for (int j = 0; j < i - 1; j ++) {
@@ -82,6 +86,7 @@ public class SortImpl {
         return array;
     }
 
+    // Time O(n^2) Space O(1)
     public int[] insertSort(int[] array) {
         for (int i = 0; i < array.length - 1; i ++) {
             for (int j = i; j > 0; j --) {

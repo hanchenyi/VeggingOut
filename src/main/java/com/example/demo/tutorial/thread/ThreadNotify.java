@@ -1,8 +1,8 @@
-package com.example.demo.util.thread;
+package com.example.demo.tutorial.thread;
 
 public class ThreadNotify {
 
-    private Object lock;
+    private final Object lock;
 
     public ThreadNotify(Object lock) {
         this.lock = lock;

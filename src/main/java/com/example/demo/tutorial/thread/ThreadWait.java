@@ -1,8 +1,8 @@
-package com.example.demo.util.thread;
+package com.example.demo.tutorial.thread;
 
 public class ThreadWait {
 
-    private Object lock;
+    private final Object lock;
 
     public ThreadWait(Object lock) {
         this.lock = lock;

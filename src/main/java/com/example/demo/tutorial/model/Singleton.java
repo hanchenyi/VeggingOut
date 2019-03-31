@@ -3,13 +3,13 @@ package com.example.demo.tutorial.model;
 public enum Singleton {
     INSTANCE;
 
-    int value;
+    String value;
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

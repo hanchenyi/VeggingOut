@@ -1,4 +1,4 @@
-package com.example.demo.tutorial;
+package com.example.demo.tutorial.singleton;
 
 public class Singleton {
     private static volatile Singleton obj;

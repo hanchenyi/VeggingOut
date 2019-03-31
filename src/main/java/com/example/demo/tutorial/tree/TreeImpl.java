@@ -1,4 +1,4 @@
-package com.example.demo.tutorial;
+package com.example.demo.tutorial.tree;
 
 import com.example.demo.tutorial.model.TreeNode;
 
