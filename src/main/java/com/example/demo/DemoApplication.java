@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-	new DeadLock();
+
 	}
 
 }
