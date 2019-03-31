@@ -1,4 +1,4 @@
-package com.example.demo.util.thread;
+package com.example.demo.tutorial.model;
 
 
 public class TreeNode {

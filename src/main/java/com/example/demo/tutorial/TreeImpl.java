@@ -1,4 +1,6 @@
-package com.example.demo.util.thread;
+package com.example.demo.tutorial;
+
+import com.example.demo.tutorial.model.TreeNode;
 
 import java.util.*;
 
@@ -59,7 +61,7 @@ public class TreeImpl {
     }
 
     public TreeNode deserialize(String data) {
-        if (data == "") return null;
+        if (data.equals("")) return null;
         Queue<TreeNode> q = new LinkedList<>();
         String[] values = data.split(" ");
         TreeNode root = new TreeNode(Integer.parseInt(values[0]));
@@ -84,7 +86,7 @@ public class TreeImpl {
     public TreeNode buildTreePostIn(int[] inorder, int[] postorder) {
         if (inorder == null || postorder == null || inorder.length != postorder.length)
             return null;
-        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> hm = new HashMap<>();
         for (int i=0;i<inorder.length;++i)
             hm.put(inorder[i], i);
         return buildTreePostIn(inorder, 0, inorder.length-1, postorder, 0,
@@ -109,7 +111,7 @@ public class TreeImpl {
         int ip = inorder.length - 1;
         int pp = postorder.length - 1;
 
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack = new Stack<>();
         TreeNode prev = null;
         TreeNode root = new TreeNode(postorder[pp]);
         stack.push(root);
@@ -137,7 +139,7 @@ public class TreeImpl {
 
     //Construct Binary Tree from Preorder and Inorder Traversal
     public TreeNode buildTree2(int[] preorder, int[] inorder) {
-        Map<Integer, Integer> inMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> inMap = new HashMap<>();
 
         for(int i = 0; i < inorder.length; i++) {
             inMap.put(inorder[i], i);

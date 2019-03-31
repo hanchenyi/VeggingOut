@@ -1,4 +1,4 @@
-package com.example.demo.util.thread;
+package com.example.demo.tutorial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +67,31 @@ public class SortImpl {
             mergedArray[k ++] = right[j ++];
         }
         return mergedArray;
+    }
+
+    public int[] bubbleSort(int[] array) {
+        for (int i = array.length; i > 0; i --) {
+            for (int j = 0; j < i - 1; j ++) {
+                if (array[j] > array[j + 1]) {
+                    int t = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = t;
+                }
+            }
+        }
+        return array;
+    }
+
+    public int[] insertSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i ++) {
+            for (int j = i; j > 0; j --) {
+                if (array[j + 1] < array[j]) {
+                    int t = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = t;
+                }
+            }
+        }
+        return array;
     }
 }
