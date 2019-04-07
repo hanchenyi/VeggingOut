@@ -1,4 +1,4 @@
-package com.example.demo.tutorial;
+package com.example.demo.tutorial.sort;
 
 import java.util.ArrayList;
 import java.util.List;
