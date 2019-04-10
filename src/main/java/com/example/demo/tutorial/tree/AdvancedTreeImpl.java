@@ -4,7 +4,7 @@ import com.example.demo.tutorial.model.TreeNode;
 
 import java.util.*;
 
-public class TreeImpl {
+public class AdvancedTreeImpl {
     //Given a binary tree, determine if it is height-balanced.
     private boolean result = true;
 
