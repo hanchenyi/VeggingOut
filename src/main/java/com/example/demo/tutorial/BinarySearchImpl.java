@@ -190,4 +190,5 @@ public class BinarySearchImpl {
         for (int i = 0; i < k; i++) res.add(A[left + i]);
         return res;
     }
+
 }
