@@ -15,19 +15,19 @@ public class SortImpl {
         }
         int start = low, end = high;
         int pivot = (low + high) / 2;
-        while(low <= high) {
+        while (low <= high) {
             while (nums[pivot] > nums[low]) {
-                low ++;
+                low++;
             }
             while (nums[pivot] < nums[high]) {
-                high --;
+                high--;
             }
             if (low <= high) {
                 int t = nums[low];
                 nums[low] = nums[high];
                 nums[high] = t;
-                low ++;
-                high --;
+                low++;
+                high--;
             }
         }
         quickSort(nums, start, high);
@@ -43,7 +43,7 @@ public class SortImpl {
         int middle = len / 2;
         int[] left = new int[middle];
         int[] right = new int[len - middle];
-        for (int i = 0; i < middle; i ++) {
+        for (int i = 0; i < middle; i++) {
             left[i] = array[i];
             right[i] = array[middle + 1];
         }
@@ -61,21 +61,21 @@ public class SortImpl {
         int[] mergedArray = new int[leftLen + rightLen];
         int i = 0, j = 0, k = 0;
         while (i < leftLen && j < rightLen) {
-            mergedArray[k ++] = left[i] < right[j] ? left[i ++] : right[j ++];
+            mergedArray[k++] = left[i] < right[j] ? left[i++] : right[j++];
         }
         while (i < leftLen) {
-            mergedArray[k ++] = left[i ++];
+            mergedArray[k++] = left[i++];
         }
         while (i < rightLen) {
-            mergedArray[k ++] = right[j ++];
+            mergedArray[k++] = right[j++];
         }
         return mergedArray;
     }
 
     // Time O(n^2) Space O(1)
     public int[] bubbleSort(int[] array) {
-        for (int i = array.length; i > 0; i --) {
-            for (int j = 0; j < i - 1; j ++) {
+        for (int i = array.length; i > 0; i--) {
+            for (int j = 0; j < i - 1; j++) {
                 if (array[j] > array[j + 1]) {
                     int t = array[j + 1];
                     array[j + 1] = array[j];
@@ -88,8 +88,8 @@ public class SortImpl {
 
     // Time O(n^2) Space O(1)
     public int[] insertSort(int[] array) {
-        for (int i = 0; i < array.length - 1; i ++) {
-            for (int j = i; j > 0; j --) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i; j >= 0; j--) {
                 if (array[j + 1] < array[j]) {
                     int t = array[j];
                     array[j] = array[j + 1];
