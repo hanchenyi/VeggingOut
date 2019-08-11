@@ -1,6 +1,7 @@
 package com.example.demo.tutorial.sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SortImpl {
@@ -98,5 +99,41 @@ public class SortImpl {
             }
         }
         return array;
+    }
+
+    //时间效率：设待排序列为n个记录，d个关键码，关键码的取值范围为radix，则进行链式基数排序的时间复杂度为O(d(n+radix))，其中，一趟分配时间复杂度为O(n)，一趟收集时间复杂度为O(radix)，共进行d趟分配和收集。
+    //空间效率：需要2*radix个指向队列的辅助空间，以及用于静态链表的n个指针。
+    public void radixSort(int[] number) //d表示最大的数有多少位
+    {
+        int max = Arrays.stream(number).max().getAsInt();
+        int d = 0;
+        while (max > 0) {
+            d++;
+            max /= 10;
+        }
+
+        int k = 0;
+        int n = 1;
+        int m = 1; //控制键值排序依据在哪一位
+        int[][] temp = new int[10][number.length]; //数组的第一维表示可能的余数0-9
+        int[] order = new int[10]; //数组orderp[i]用来表示该位是i的数的个数
+        while (m <= d) {
+            for (int i = 0; i < number.length; i++) {
+                int lsd = ((number[i] / n) % 10);
+                temp[lsd][order[lsd]] = number[i];
+                order[lsd]++;
+            }
+            for (int i = 0; i < 10; i++) {
+                if (order[i] != 0)
+                    for (int j = 0; j < order[i]; j++) {
+                        number[k] = temp[i][j];
+                        k++;
+                    }
+                order[i] = 0;
+            }
+            n *= 10;
+            k = 0;
+            m++;
+        }
     }
 }
