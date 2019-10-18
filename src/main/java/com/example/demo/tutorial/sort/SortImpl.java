@@ -1,8 +1,9 @@
 package com.example.demo.tutorial.sort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.example.demo.tutorial.model.ListNode;
+import com.example.demo.tutorial.model.Worker;
+
+import java.util.*;
 
 public class SortImpl {
 
@@ -116,11 +117,11 @@ public class SortImpl {
         int n = 1;
         int m = 1; //控制键值排序依据在哪一位
         int[][] temp = new int[10][number.length]; //数组的第一维表示可能的余数0-9
-        int[] order = new int[10]; //数组orderp[i]用来表示该位是i的数的个数
+        int[] order = new int[10]; //数组order[i]用来表示该位是i的数的个数
         while (m <= d) {
             for (int i = 0; i < number.length; i++) {
                 int lsd = ((number[i] / n) % 10);
-                temp[lsd][order[lsd]] = number[i];
+                temp[lsd][order[lsd]] = number[i]; //
                 order[lsd]++;
             }
             for (int i = 0; i < 10; i++) {
@@ -135,5 +136,148 @@ public class SortImpl {
             k = 0;
             m++;
         }
+    }
+
+    public ListNode mergeKLists(List<ListNode> lists) {
+        int length = lists.size();
+
+        if (length == 0)
+            return null;
+        if (length == 1) {
+            return lists.get(0);
+        }
+
+        int mid = (length - 1) / 2;
+        ListNode l1 = mergeKLists(lists.subList(0, mid + 1));
+        ListNode l2 = mergeKLists(lists.subList(mid + 1, length));
+
+        return mergeTowLists(l1, l2);
+
+    }
+
+    public ListNode mergeTowLists(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode(0);
+        ListNode list = result;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                list.next = l1;
+                l1 = l1.next;
+            } else {
+                list.next = l2;
+                l2 = l2.next;
+            }
+            list = list.next;
+        }
+
+        while (l1 != null) {
+            list.next = l1;
+            l1 = l1.next;
+            list = list.next;
+        }
+
+        while (l2 != null) {
+            list.next = l2;
+            l2 = l2.next;
+            list = list.next;
+        }
+
+        return result.next;
+    }
+
+    class ListNodeComparator implements Comparator<ListNode> {
+        @Override
+        public int compare(ListNode o1, ListNode o2) {
+            if (o1.val < o2.val)
+                return -1;
+            else if (o1.val == o2.val)
+                return 0;
+            else
+                return 1;
+        }
+
+    }
+
+    public ListNode mergeKLists1(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new ListNodeComparator());
+
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+
+        for (int i = 0; i < lists.length; i++) {
+            ListNode node = lists[i];
+            if (node != null) {
+                queue.add(node);
+            }
+        }
+
+
+        while (!queue.isEmpty()) {
+            tail.next = queue.poll();
+            tail = tail.next;
+
+            if (tail.next != null)
+                queue.add(tail.next);
+        }
+        return dummy.next;
+    }
+
+    // For each worker in order of ratio, we know all currently considered workers have lower ratio.         //(This worker will be the 'captain', as described in Approach #1.)
+    //We calculate the candidate answer as this ratio times the sum of the smallest K workers in quality.
+    public double mincostToHireWorkers(int[] quality, int[] wage, int K) {
+        int N = quality.length;
+        Worker[] workers = new Worker[N];
+        for (int i = 0; i < N; ++i)
+            workers[i] = new Worker(quality[i], wage[i]);
+        Arrays.sort(workers);
+
+        double ans = 1e9;
+        int sumq = 0;
+        PriorityQueue<Integer> pool = new PriorityQueue();
+        for (Worker worker: workers) {
+            pool.offer(-worker.quality);
+            sumq += worker.quality;
+            if (pool.size() > K)
+                sumq += pool.poll();
+            if (pool.size() == K)
+                ans = Math.min(ans, sumq * worker.ratio());
+        }
+
+        return ans;
+    }
+
+    public static int partition(int[] arr, int lo, int hi) {
+        int i = lo, j = hi, pivot = arr[lo];
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            arr[i] = arr[j];
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            arr[j] = arr[i];
+        }
+        arr[i] = pivot;
+        return i;
+    }
+
+    public static int quickSelect(int[] arr, int k) {
+        k = arr.length - k;
+        int lo = 0, hi = arr.length - 1;
+        while (lo < hi) {
+            int i = partition(arr, lo, hi);
+            if (i < k) {
+                lo = i + 1;
+            }
+            else if (i > k) {
+                hi = i - 1;
+            }
+            else {
+                return arr[i];
+            }
+        }
+        return arr[lo];
     }
 }
