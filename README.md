@@ -7,9 +7,9 @@ zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
 Start Kafka server:
 kafka-server-start /usr/local/etc/kafka/server.properties 
 Create Kafka Topic:
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic greetings
 Initialize Producer console:
-kafka-console-producer --broker-list localhost:9092 --topic test
+kafka-console-producer --broker-list localhost:9092 --topic greetings
 Initialize Consumer console:
-kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning
+kafka-console-consumer --bootstrap-server localhost:9092 --topic greetings --from-beginning
 ```
