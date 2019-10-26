@@ -17,12 +17,11 @@ public class MyEnvironmentPostProcessor  implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        try (InputStream input = new FileInputStream("xxx/Documents/projects/application.properties")) {
+        try (InputStream input = new FileInputStream("/Users/chenyi/Projects/java/config/application.properties")) {
             Properties properties = new Properties();
             properties.load(input);
             PropertiesPropertySource propertySource = new PropertiesPropertySource("ve", properties);
             environment.getPropertySources().addLast(propertySource);
-            System.out.println("load external config files");
             application.setAllowBeanDefinitionOverriding(true);
 
         } catch (Exception e) {
