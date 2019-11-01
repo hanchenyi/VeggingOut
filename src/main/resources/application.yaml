@@ -5,9 +5,13 @@ spring:
         binder:
           brokers: localhost:9092
       bindings:
-        greetings-in:
-          destination: greetings
+        bitcoin-in:
+          destination: bitcoin
           contentType: application/json
-        greetings-out:
-          destination: greetings
+        bitcoin-out:
+          destination: bitcoin
           contentType: application/json
+
+external:
+  ticker:
+    uri: https://api.coindesk.com/v1/%s/currentprice.json

@@ -5,15 +5,15 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface KafkaServerStreams {
+public interface TickerKafkaStream {
 
-    String INPUT = "greetings-in";
-    String OUTPUT = "greetings-out";
+    String INPUT = "bitcoin-in";
+    String OUTPUT = "bitcoin-out";
 
     @Input(INPUT)
-    SubscribableChannel inboundGreetings();
+    SubscribableChannel inbound();
 
     @Output(OUTPUT)
-    MessageChannel outboundGreetings();
+    MessageChannel outbound();
 
 }
