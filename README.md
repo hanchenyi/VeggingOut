@@ -11,3 +11,7 @@ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partit
 kafka-console-producer --broker-list localhost:9092 --topic greetings
 - Initialize Consumer console:
 kafka-console-consumer --bootstrap-server localhost:9092 --topic greetings --from-beginning
+
+
+### Kafka and Zookeeper MultiNode Cluster Setup Reference
+- https://medium.com/@kiranps11/kafka-and-zookeeper-multinode-cluster-setup-3511aef4a505

@@ -1,13 +1,20 @@
 package com.example.demo.controller;
 
-import com.example.demo.Service.KafkaService;
-import com.example.demo.controller.model.Greetings;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import com.example.demo.constant.CoinType;
+import com.example.demo.external.TickerListener;
+import com.example.demo.external.model.TickerData;
+import com.example.demo.service.KafkaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/kafka")
 public class KafkaController {
+
+    @Autowired
+    TickerListener tickerListener;
 
     private final KafkaService kafkaService;
 
@@ -17,14 +24,8 @@ public class KafkaController {
 
     @GetMapping("/hello")
     public String hello() {
+        TickerData data = tickerListener.getTickerData(CoinType.BTC.name());
         return "Hello World!";
     }
 
-    @PostMapping("/produce")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void produce() {
-        long timeStamp = System.currentTimeMillis();
-        Greetings greetings = new Greetings("message sending at " + timeStamp, timeStamp);
-        kafkaService.sendMessage(greetings);
-    }
 }
